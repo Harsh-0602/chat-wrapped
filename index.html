@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Turn an exported WhatsApp chat into a private, shareable Chat Wrapped."
+    />
+    <title>Chat Wrapped - Your WhatsApp story, decoded</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="Chat Wrapped home">
+        <span class="brand-mark">W</span>
+        <span>Chat Wrapped</span>
+      </a>
+      <span class="privacy-pill"><span class="privacy-dot"></span> 100% on-device</span>
+    </header>
+
+    <main>
+      <section class="hero" id="hero">
+        <div class="eyebrow">Your conversations have a story</div>
+        <h1>Turn your WhatsApp chat into a <span>Wrapped.</span></h1>
+        <p class="hero-copy">
+          Discover who texts first, who replies fastest, your peak chat hour,
+          favourite words, emoji habits, and much more.
+        </p>
+
+        <div class="hero-badges">
+          <span>No login</span>
+          <span>No upload</span>
+          <span>No judgement*</span>
+        </div>
+
+        <div class="upload-card">
+          <div class="step-tabs" role="tablist" aria-label="Input method">
+            <button class="tab active" data-tab="file" role="tab">Upload .txt</button>
+            <button class="tab" data-tab="paste" role="tab">Paste chat</button>
+          </div>
+
+          <div class="tab-panel active" id="file-panel">
+            <label class="drop-zone" id="drop-zone" for="file-input">
+              <input id="file-input" type="file" accept=".txt,text/plain" />
+              <span class="upload-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4" />
+                </svg>
+              </span>
+              <strong>Drop your exported chat here</strong>
+              <span>or tap to choose a .txt file</span>
+              <small id="file-name">Maximum 25 MB</small>
+            </label>
+          </div>
+
+          <div class="tab-panel" id="paste-panel">
+            <textarea
+              id="chat-input"
+              rows="8"
+              placeholder="Paste exported WhatsApp chat here..."
+              spellcheck="false"
+            ></textarea>
+          </div>
+
+          <div class="error-message" id="error-message" role="alert"></div>
+          <button class="primary-button" id="analyse-button">
+            Create my Wrapped
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14m-5-5 5 5-5 5" />
+            </svg>
+          </button>
+          <button class="demo-button" id="demo-button">Try with a demo chat</button>
+
+          <div class="privacy-note">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 10V7a4 4 0 0 1 8 0v3m-9 0h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1Z" />
+            </svg>
+            <span><strong>Your chat never leaves this device.</strong> Everything is analysed locally in your browser.</span>
+          </div>
+        </div>
+
+        <details class="export-help">
+          <summary>How do I export a WhatsApp chat?</summary>
+          <div>
+            <p><strong>Android:</strong> Open chat → ⋮ → More → Export chat → Without media.</p>
+            <p><strong>iPhone:</strong> Open chat → tap contact/group name → Export Chat → Without Media.</p>
+          </div>
+        </details>
+      </section>
+
+      <section class="results hidden" id="results">
+        <div class="results-header">
+          <div>
+            <div class="eyebrow">The receipts are in</div>
+            <h2 id="results-title">Your Chat Wrapped</h2>
+            <p id="date-range"></p>
+          </div>
+          <button class="secondary-button" id="new-chat-button">Analyse another</button>
+        </div>
+
+        <div class="spotlight-grid">
+          <article class="stat-card hero-stat purple">
+            <span class="card-kicker">Total messages</span>
+            <strong id="total-messages">0</strong>
+            <p id="total-subtext"></p>
+            <div class="mini-bars" id="message-bars"></div>
+          </article>
+
+          <article class="stat-card hero-stat lime">
+            <span class="card-kicker">Conversation starter</span>
+            <strong id="starter-name">-</strong>
+            <p id="starter-subtext"></p>
+            <div class="award-icon">01</div>
+          </article>
+        </div>
+
+        <div class="stat-grid">
+          <article class="stat-card">
+            <span class="card-kicker">Fastest replier</span>
+            <strong id="fastest-name">-</strong>
+            <p id="fastest-time"></p>
+          </article>
+          <article class="stat-card">
+            <span class="card-kicker">Peak chat hour</span>
+            <strong id="peak-hour">-</strong>
+            <p id="peak-hour-subtext"></p>
+          </article>
+          <article class="stat-card">
+            <span class="card-kicker">Longest streak</span>
+            <strong id="longest-streak">-</strong>
+            <p>consecutive days of messages</p>
+          </article>
+          <article class="stat-card">
+            <span class="card-kicker">Longest message</span>
+            <strong id="longest-message">-</strong>
+            <p id="longest-message-subtext"></p>
+          </article>
+        </div>
+
+        <div class="insights-grid">
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <span class="card-kicker">The balance of power</span>
+                <h3>Message scoreboard</h3>
+              </div>
+            </div>
+            <div id="participant-list" class="participant-list"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <span class="card-kicker">Your shared language</span>
+                <h3>Top words</h3>
+              </div>
+            </div>
+            <div id="word-cloud" class="word-cloud"></div>
+          </article>
+
+          <article class="panel emoji-panel">
+            <div class="panel-heading">
+              <div>
+                <span class="card-kicker">Emotional vocabulary</span>
+                <h3>Emoji leaderboard</h3>
+              </div>
+            </div>
+            <div id="emoji-list" class="emoji-list"></div>
+          </article>
+
+          <article class="panel activity-panel">
+            <div class="panel-heading">
+              <div>
+                <span class="card-kicker">When you come alive</span>
+                <h3>Weekly activity</h3>
+              </div>
+            </div>
+            <div id="day-chart" class="day-chart"></div>
+          </article>
+        </div>
+
+        <section class="share-section">
+          <div class="share-copy">
+            <div class="eyebrow">Made for the group chat</div>
+            <h2>Download your share card</h2>
+            <p>Names are shortened and message contents are never shown on the card.</p>
+          </div>
+          <div class="share-layout">
+            <canvas id="share-canvas" width="1080" height="1350"></canvas>
+            <div class="share-actions">
+              <label>
+                Card theme
+                <select id="theme-select">
+                  <option value="midnight">Midnight</option>
+                  <option value="lime">Electric lime</option>
+                  <option value="sunset">Sunset</option>
+                </select>
+              </label>
+              <button class="primary-button" id="download-button">Download card</button>
+              <button class="secondary-button" id="share-button">Share card</button>
+            </div>
+          </div>
+        </section>
+
+        <p class="fine-print">
+          *This is entertainment, not relationship science. Reply times exclude gaps longer than 12 hours.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      Built for private laughs, not private data. <span>Chat Wrapped MVP</span>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
