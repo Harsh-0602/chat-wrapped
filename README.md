@@ -16,12 +16,18 @@ browser.
 Open `index.html` in a modern browser. Select **Try with a demo chat** to see
 the complete experience without using personal data.
 
-## Deploy free on Cloudflare Pages
+## Deploy free on GitHub Pages
 
-1. Fork or import this repository in Cloudflare Pages.
-2. Select **Static HTML**.
-3. Leave the build command blank.
-4. Set the output directory to `/`.
+1. Push this project to a public GitHub repository.
+2. Open **Settings → Pages** in the repository.
+3. Under **Build and deployment**, select **Deploy from a branch**.
+4. Select the `main` branch and `/ (root)`, then save.
+
+The free site URL will be:
+
+`https://YOUR_USERNAME.github.io/REPOSITORY_NAME/`
+
+The share card detects the live URL automatically, so no URL edit is needed.
 
 ## Privacy
 

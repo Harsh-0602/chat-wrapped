@@ -11,8 +11,10 @@ const STOP_WORDS = new Set([
   "message", "media", "omitted", "image", "video", "sticker", "deleted"
 ]);
 
-// Replace this once only if you deploy under a different Cloudflare Pages name.
-const PRODUCT_URL = "https://chat-wrapped-india.pages.dev";
+const PRODUCT_URL =
+  location.protocol === "https:"
+    ? `${location.origin}${location.pathname.replace(/\/[^/]*$/, "/")}`
+    : "https://YOUR_USERNAME.github.io/chat-wrapped/";
 
 const DEMO_CHAT = `[01/03/2025, 9:12:04 PM] Aisha: Reached home?
 [01/03/2025, 9:12:42 PM] Kabir: Yes boss 😌
