@@ -1,25 +1,33 @@
-# Chat Wrapped MVP
+# Chat Wrapped
 
-A zero-backend WhatsApp chat analytics experience. Users export a WhatsApp chat
-as a `.txt` file, and all parsing and analysis happens locally in the browser.
+Private, free, open-source WhatsApp chat analytics that runs entirely in the
+browser.
 
-## Run
+## Features
 
-Open `index.html` directly, or serve the `outputs` directory with any static
-file server.
+- Android and iPhone WhatsApp text export support
+- Message scoreboard, reply times, activity, streaks, words, and emojis
+- Downloadable social sharing card
+- No login, backend, database, analytics, ads, or paid API
+- No chat data leaves the device
 
-## Supported exports
+## Use locally
 
-- Android and iPhone bracketed date formats
-- 12-hour and 24-hour timestamps
-- Multiline messages
-- Group chats
+Open `index.html` in a modern browser. Select **Try with a demo chat** to see
+the complete experience without using personal data.
 
-The parser assumes day/month/year when both date components are 12 or lower,
-which matches the common Indian WhatsApp export format.
+## Deploy free on Cloudflare Pages
+
+1. Fork or import this repository in Cloudflare Pages.
+2. Select **Static HTML**.
+3. Leave the build command blank.
+4. Set the output directory to `/`.
 
 ## Privacy
 
-No backend, analytics, account, or network upload is used for chat contents.
-Google Fonts are loaded for presentation; self-host them before production if
-you want the page itself to make no external requests.
+The application reads selected files using browser APIs. It does not upload or
+store chat contents. See `privacy.html` for the user-facing policy.
+
+## License
+
+MIT

@@ -11,6 +11,9 @@ const STOP_WORDS = new Set([
   "message", "media", "omitted", "image", "video", "sticker", "deleted"
 ]);
 
+// Replace this once only if you deploy under a different Cloudflare Pages name.
+const PRODUCT_URL = "https://chat-wrapped-india.pages.dev";
+
 const DEMO_CHAT = `[01/03/2025, 9:12:04 PM] Aisha: Reached home?
 [01/03/2025, 9:12:42 PM] Kabir: Yes boss 😌
 [01/03/2025, 9:13:15 PM] Aisha: Good. Aaj ka plan solid tha 😂
@@ -467,11 +470,11 @@ function renderShareCard() {
   drawPill(ctx, 70, 64, 300, 60, colors.accent, colors.bg, "CHAT WRAPPED 2026");
 
   ctx.fillStyle = colors.text;
-  ctx.font = "800 76px Manrope, sans-serif";
+  ctx.font = "800 76px system-ui, sans-serif";
   ctx.fillText(topNames.length === 2 ? `${topNames[0]} + ${topNames[1]}` : "The group chat", 70, 220);
 
   ctx.fillStyle = colors.muted;
-  ctx.font = "500 28px DM Sans, sans-serif";
+  ctx.font = "500 28px system-ui, sans-serif";
   ctx.fillText(`${formatDate(data.firstDate)} - ${formatDate(data.lastDate)}`, 72, 270);
 
   drawCardMetric(ctx, 70, 350, 940, 260, colors, data.total.toLocaleString("en-IN"), "messages exchanged");
@@ -479,14 +482,14 @@ function renderShareCard() {
   drawCardMetric(ctx, 560, 640, 450, 250, colors, formatHour(data.peakHour), "peak chat hour");
 
   ctx.fillStyle = colors.text;
-  ctx.font = "800 42px Manrope, sans-serif";
+  ctx.font = "800 42px system-ui, sans-serif";
   ctx.fillText("The scoreboard", 70, 980);
 
   data.participants.slice(0, 3).forEach((person, index) => {
     const y = 1045 + index * 72;
     const percent = Math.round((person.count / data.total) * 100);
     ctx.fillStyle = colors.muted;
-    ctx.font = "700 26px DM Sans, sans-serif";
+    ctx.font = "700 26px system-ui, sans-serif";
     ctx.fillText(firstName(person.name), 70, y);
     ctx.fillStyle = colors.text;
     ctx.fillText(`${percent}%`, 930, y);
@@ -499,12 +502,14 @@ function renderShareCard() {
   });
 
   ctx.fillStyle = colors.muted;
-  ctx.font = "600 22px DM Sans, sans-serif";
+  ctx.font = "600 22px system-ui, sans-serif";
   ctx.fillText("Made privately on your device", 70, 1290);
   ctx.fillStyle = colors.accent;
-  ctx.font = "800 22px Manrope, sans-serif";
+  ctx.font = "800 22px system-ui, sans-serif";
   ctx.textAlign = "right";
-  ctx.fillText("chatwrapped", 1010, 1290);
+  ctx.fillText("Make yours free", 1010, 1260);
+  ctx.font = "700 18px system-ui, sans-serif";
+  ctx.fillText(PRODUCT_URL.replace("https://", ""), 1010, 1292);
   ctx.textAlign = "left";
 }
 
@@ -514,10 +519,10 @@ function drawCardMetric(ctx, x, y, width, height, colors, value, label) {
   ctx.fill();
   ctx.fillStyle = colors.text;
   const size = value.length > 14 ? 54 : width > 500 ? 104 : 58;
-  ctx.font = `800 ${size}px Manrope, sans-serif`;
+  ctx.font = `800 ${size}px system-ui, sans-serif`;
   ctx.fillText(value, x + 36, y + 115);
   ctx.fillStyle = colors.muted;
-  ctx.font = "600 25px DM Sans, sans-serif";
+  ctx.font = "600 25px system-ui, sans-serif";
   ctx.fillText(label, x + 38, y + height - 45);
 }
 
@@ -526,7 +531,7 @@ function drawPill(ctx, x, y, width, height, fill, textColor, text) {
   roundRect(ctx, x, y, width, height, height / 2);
   ctx.fill();
   ctx.fillStyle = textColor;
-  ctx.font = "800 20px Manrope, sans-serif";
+  ctx.font = "800 20px system-ui, sans-serif";
   ctx.fillText(text, x + 25, y + 39);
 }
 
@@ -548,7 +553,7 @@ async function shareCard() {
   if (navigator.canShare?.({ files: [file] })) {
     await navigator.share({
       title: "My Chat Wrapped",
-      text: "The group chat receipts are in.",
+      text: `The group chat receipts are in. Make yours free: ${PRODUCT_URL}`,
       files: [file]
     });
   } else {
