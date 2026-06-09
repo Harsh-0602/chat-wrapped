@@ -13,21 +13,9 @@ browser.
 
 ## Use locally
 
-Open `index.html` in a modern browser. Select **Try with a demo chat** to see
+Open `https://harsh-0602.github.io/chat-wrapped/` in a modern browser. Select **Try with a demo chat** to see
 the complete experience without using personal data.
 
-## Deploy free on GitHub Pages
-
-1. Push this project to a public GitHub repository.
-2. Open **Settings → Pages** in the repository.
-3. Under **Build and deployment**, select **Deploy from a branch**.
-4. Select the `main` branch and `/ (root)`, then save.
-
-The free site URL will be:
-
-`https://YOUR_USERNAME.github.io/REPOSITORY_NAME/`
-
-The share card detects the live URL automatically, so no URL edit is needed.
 
 ## Privacy
 
